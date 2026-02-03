@@ -17,8 +17,15 @@ export class RecadosService {
     throw new NotFoundException('Recado não encontrado');
   }
 
-  create(createRecadoDto: CreateRecadoDto) {
-    return 'This action adds a new recado';
+  async create(createRecadoDto: CreateRecadoDto) {
+    const novoRecado = {
+      ...createRecadoDto,
+      lido: false,
+      data: new Date()
+    }
+    const recado = await this.recadoRepository.create(novoRecado)
+
+    return this.recadoRepository.save(recado);
   }
 
   async findAll() {
