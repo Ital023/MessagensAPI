@@ -16,7 +16,7 @@ export class PessoasController {
   constructor(private readonly pessoasService: PessoasService) {}
 
   @Post()
-  create(@Body() createPessoaDto: CreatePessoaDto) {
+  async create(@Body() createPessoaDto: CreatePessoaDto) {
     return this.pessoasService.create(createPessoaDto);
   }
 
@@ -26,17 +26,17 @@ export class PessoasController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.pessoasService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePessoaDto: UpdatePessoaDto) {
+  async update(@Param('id') id: string, @Body() updatePessoaDto: UpdatePessoaDto) {
     return this.pessoasService.update(+id, updatePessoaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.pessoasService.remove(+id);
   }
 }
