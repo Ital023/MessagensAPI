@@ -3,3 +3,7 @@
 # Recados
 ###
 GET {{baseUrl}}/recados/
+
+###
+
+GET {{baseUrl}}/recados/1

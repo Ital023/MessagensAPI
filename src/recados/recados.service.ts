@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,6 +13,10 @@ export class RecadosService {
     private readonly recadoRepository: Repository<Recado>,
   ){}
 
+   throwNotFoundError() {
+    throw new NotFoundException('Recado não encontrado');
+  }
+
   create(createRecadoDto: CreateRecadoDto) {
     return 'This action adds a new recado';
   }
@@ -22,8 +26,14 @@ export class RecadosService {
     return recados
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} recado`;
+  async findOne(id: number) {
+    const recado = await this.recadoRepository.findOne({
+      where: { id }
+    });
+
+    if (recado) return recado;
+
+    this.throwNotFoundError();
   }
 
   update(id: number, updateRecadoDto: UpdateRecadoDto) {
