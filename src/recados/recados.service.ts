@@ -7,13 +7,12 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class RecadosService {
-
   constructor(
     @InjectRepository(Recado)
     private readonly recadoRepository: Repository<Recado>,
-  ){}
+  ) {}
 
-   throwNotFoundError() {
+  throwNotFoundError() {
     throw new NotFoundException('Recado não encontrado');
   }
 
@@ -21,33 +20,39 @@ export class RecadosService {
     const novoRecado = {
       ...createRecadoDto,
       lido: false,
-      data: new Date()
-    }
-    const recado = await this.recadoRepository.create(novoRecado)
+      data: new Date(),
+    };
+    const recado = await this.recadoRepository.create(novoRecado);
 
     return this.recadoRepository.save(recado);
   }
 
   async findAll() {
     const recados = await this.recadoRepository.find();
-    return recados
+    return recados;
   }
 
   async findOne(id: number) {
     const recado = await this.recadoRepository.findOne({
-      where: { id }
+      where: { id },
     });
 
-    if (recado) return recado;
+    if (!recado) return this.throwNotFoundError();
 
-    this.throwNotFoundError();
+    return recado;
   }
 
   update(id: number, updateRecadoDto: UpdateRecadoDto) {
     return `This action updates a #${id} recado`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} recado`;
+  async remove(id: number) {
+    const recado = await this.recadoRepository.findOneBy({
+      id,
+    });
+
+    if (!recado) return this.throwNotFoundError();
+
+    return this.recadoRepository.remove(recado);
   }
 }

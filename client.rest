@@ -18,3 +18,7 @@ Content-Type: application/json
     "de": "Joana", 
     "para": "João"
 }
+
+###
+
+DELETE {{baseUrl}}/recados/5/
