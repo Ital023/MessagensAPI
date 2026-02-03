@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query, ParseIntPipe } from '@nestjs/common';
 import { RecadosService } from './recados.service';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
@@ -26,7 +26,7 @@ export class RecadosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRecadoDto: UpdateRecadoDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateRecadoDto: UpdateRecadoDto) {
     return this.recadosService.update(+id, updateRecadoDto);
   }
 

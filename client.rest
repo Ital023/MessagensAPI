@@ -6,7 +6,7 @@ GET {{baseUrl}}/recados/
 
 ###
 
-GET {{baseUrl}}/recados/1
+GET {{baseUrl}}/recados/6
 
 ### 
 
@@ -22,3 +22,12 @@ Content-Type: application/json
 ###
 
 DELETE {{baseUrl}}/recados/5/
+
+###
+
+PATCH {{baseUrl}}/recados/6/ 
+Content-Type: application/json
+
+{
+"texto": "Recado 1", "lido": true
+}
