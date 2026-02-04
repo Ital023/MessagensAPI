@@ -26,17 +26,17 @@ export class PessoasController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.pessoasService.findOne(+id);
+  async findOne(@Param('id') id: number) {
+    return this.pessoasService.findOne(id);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updatePessoaDto: UpdatePessoaDto) {
-    return this.pessoasService.update(+id, updatePessoaDto);
+  async update(@Param('id') id: number, @Body() updatePessoaDto: UpdatePessoaDto) {
+    return this.pessoasService.update(id, updatePessoaDto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.pessoasService.remove(+id);
+  async remove(@Param('id') id: number) {
+    return this.pessoasService.remove(id);
   }
 }
