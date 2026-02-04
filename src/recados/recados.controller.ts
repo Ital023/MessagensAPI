@@ -20,7 +20,7 @@ export class RecadosController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseIntPipe) id: string) {
     return this.recadosService.findOne(+id);
   }
 
@@ -30,7 +30,7 @@ export class RecadosController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id', ParseIntPipe) id: string) {
     return this.recadosService.remove(+id);
   }
 }

@@ -72,6 +72,8 @@ export class RecadosService {
   }
 
   async findOne(id: number): Promise<Recado> {
+    console.log(id, typeof id);
+    
     const recado = await this.recadoRepository.findOne({
       where: { id },
       relations: ['de', 'para'],
