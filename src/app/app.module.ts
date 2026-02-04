@@ -7,6 +7,7 @@ import { PessoasModule } from '../pessoas/pessoas.module';
 import { ConfigModule, ConfigService, ConfigType } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
 import appConfig from './app.config';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import appConfig from './app.config';
     }),
     RecadosModule,
     PessoasModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
